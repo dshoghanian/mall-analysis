@@ -111,8 +111,6 @@ Use customer and sales data to:
 
 **Customer attributes dataset:** `customer_data.xlsx` (sheet: `customer_data`) — 99,457 rows × 4 cols
 
-> The statistics above are derived directly from the Excel files within this repo (no assumptions added).
-
 ---
 
 ## How to run
