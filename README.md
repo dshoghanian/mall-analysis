@@ -1,118 +1,157 @@
-# Shopping Mall Customer Analytics — Segmentation & Sales Insights
+# Mall Analysis — Customer Segmentation & Sales Insights
 
-Customer segmentation and sales analysis to inform targeted marketing, store planning, and retention strategies. End‑to‑end workflow from data cleaning to actionable insights.
+A business analytics project that profiles mall customers, quantifies spend behaviors, and surfaces actionable segments for targeted marketing and store planning.
 
 ---
 
 ## Business context — why this matters
-Retail and mall operators need to understand **who their customers are** and **how they spend** to improve targeting, personalize offers, and optimize store mix. This project turns raw spreadsheets and an analysis notebook into insights that guide **segment‑specific marketing**, **product assortment**, and **revenue forecasting**.
+Understanding **who shops and how they spend** helps Marketing and Merchandising prioritize campaigns, tailor assortments, and improve retention. This repo shows how to transform raw spreadsheets into **segment profiles** and **decision‑ready visuals**.
 
 ---
 
 ## Problem statement
-Given customer demographics, spending behavior, and sales records, **identify meaningful customer segments** and **surface drivers of spend** so decision‑makers can:
-- Focus promotions on high‑response segments
-- Adjust assortment and staffing to match traffic patterns
-- Quantify the revenue contribution by segment and track it over time
+Use customer and sales data to:
+- **Identify segments** with distinct spend/demographic patterns
+- **Quantify segment sizes and KPIs** (e.g., avg spend, income distribution)
+- **Inform actions** (personalized offers, channel mix, staffing)
 
 ---
 
-## What’s in this repository
-- `Mall_Analysis.ipynb` — Jupyter notebook with EDA, feature engineering, and (if present) segmentation/modeling steps.
-- `shopping_mall_data.xlsx` — Customer‑level attributes (e.g., Gender/Age/Income/Spending Score).
-- `sales_data.xlsx` — Transaction/sales records (columns vary; totals and date range summarized below).
-- `customer_data.xlsx` — Additional customer attributes (joins/enrichment).
-- Any generated figures/reports are saved to `reports/` (create as needed).
-
-> Tip: keep raw files under `data/raw/` and save cleaned outputs to `data/processed/` for reproducibility.
+## Repository structure
+```
+./mall_repo/
+└─ mall-analysis/
+   ├─ .git/
+   │  ├─ hooks/
+   │  │  ├─ applypatch-msg.sample
+   │  │  ├─ commit-msg.sample
+   │  │  ├─ fsmonitor-watchman.sample
+   │  │  ├─ post-update.sample
+   │  │  ├─ pre-applypatch.sample
+   │  │  ├─ pre-commit.sample
+   │  │  ├─ pre-merge-commit.sample
+   │  │  ├─ pre-push.sample
+   │  │  ├─ pre-rebase.sample
+   │  │  ├─ pre-receive.sample
+   │  │  ├─ prepare-commit-msg.sample
+   │  │  ├─ push-to-checkout.sample
+   │  │  ├─ sendemail-validate.sample
+   │  │  └─ update.sample
+   │  ├─ info/
+   │  │  └─ exclude
+   │  ├─ logs/
+   │  │  ├─ refs/
+   │  │  │  ├─ heads/
+   │  │  │  │  └─ main
+   │  │  │  └─ remotes/
+   │  │  │     └─ origin/
+   │  │  │        └─ HEAD
+   │  │  └─ HEAD
+   │  ├─ objects/
+   │  │  ├─ info/
+   │  │  └─ pack/
+   │  │     ├─ pack-6f4ea53a644bc39340e276b10526f45dae2b4946.idx
+   │  │     ├─ pack-6f4ea53a644bc39340e276b10526f45dae2b4946.pack
+   │  │     └─ pack-6f4ea53a644bc39340e276b10526f45dae2b4946.rev
+   │  ├─ refs/
+   │  │  ├─ heads/
+   │  │  │  └─ main
+   │  │  ├─ remotes/
+   │  │  │  └─ origin/
+   │  │  │     └─ HEAD
+   │  │  └─ tags/
+   │  ├─ config
+   │  ├─ description
+   │  ├─ HEAD
+   │  ├─ index
+   │  └─ packed-refs
+   ├─ data/
+   │  ├─ customer_data.xlsx
+   │  ├─ README.md
+   │  ├─ sales_data.xlsx
+   │  └─ shopping_mall_data.xlsx
+   ├─ notebooks/
+   │  └─ Mall_Analysis.ipynb
+   ├─ reports/
+   │  └─ README.md
+   ├─ src/
+   │  └─ __init__.py
+   ├─ LICENSE
+   ├─ README.md
+   └─ requirements.txt
+```
 
 ---
 
 ## Methods & tools (applied analytics)
-- **Data cleaning & preparation:** type casting, handling missing values, standardizing categories.
-- **Exploratory analysis & visualization:** distributions, bivariate relationships, and segment profiles.
-- **Segmentation (K‑Means)** on behavior/demographics to create actionable customer groups.
-- **KPI definition:** average spend by segment, segment sizes, and potential uplift levers.
-- **Communication:** stakeholder‑ready visuals and executive‑level takeaways in the notebook.
+- **Data cleaning & preparation:** type casting, handling missing values, standardizing categories
+- **Exploratory analysis & visualization:** distributions, correlations, segment profiling
+- **Segmentation & KPIs:** KMeans clustering if present in notebooks; otherwise descriptive KPIs
+- **Communication:** stakeholder‑ready charts and tables
 
-**Stack:** jupyter, matplotlib, numpy, pandas, scikit-learn, seaborn
+**Stack detected:** matplotlib, numpy, pandas, seaborn  
+**Methods detected:** EDA & visualization
 
 ---
 
-## Results & findings (computed from the included files)
-**Shopping Mall Customers** (`shopping_mall_data.xlsx`): 10 rows × 5 columns
+## Results & findings (computed directly from the files)
+**Shopping Mall dataset:** `shopping_mall_data.xlsx` (sheet: `shopping_mall`) — 10 rows × 5 cols
 
-_Key numeric summary (mean/median/min/max):_
+**Correlation (numeric columns, sample):**
 
-| feature | mean | median | min | max |
-| --- | --- | --- | --- | --- |
-| construction_year | 1976.60 | 1976.50 | 1956.00 | 2002.00 |
-| area (sqm) | 154800.00 | 139000.00 | 56000.00 | 250000.00 |
-| store_count | 186.00 | 185.00 | 130.00 | 270.00 |
+| feature | construction_year | area (sqm) | store_count |
+| --- | --- | --- | --- |
+| construction_year | 1.00 | -0.47 | -0.41 |
+| area (sqm) | -0.47 | 1.00 | 0.89 |
+| store_count | -0.41 | 0.89 | 1.00 |
 
 
-**Sales Data** (`sales_data.xlsx`): 99,457 rows × 7 columns
-- Date range: **2021-01-01 → 2023-12-02**
+**Sales dataset:** `sales_data.xlsx` (sheet: `sales_data`) — 99,457 rows × 7 cols
+- Date range: **2021-01-01 → 2023-12-02** (column: `invoice date`)
 
-**Additional Customer Data** (`customer_data.xlsx`): 99,457 rows × 4 columns
+**Customer attributes dataset:** `customer_data.xlsx` (sheet: `customer_data`) — 99,457 rows × 4 cols
+
+> The statistics above are derived directly from the Excel files within this repo (no assumptions added).
 
 ---
 
 ## How to run
 
 ### 1) Environment
-Create a Python environment (3.10+ recommended) and install dependencies:
+Create Python 3.10+ environment:
 ```bash
 # conda
 conda create -n mall_env python=3.11 -y
 conda activate mall_env
 
-# OR venv
+# or venv
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 ```
 
-Install packages:
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+Install requirements:
+```
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl
+jupyterlab
 ```
 
-### 2) Open the analysis
+### 2) Open the notebook
 ```bash
 jupyter lab
-# open Mall_Analysis.ipynb and run all cells
+# open the notebook(s) under /notebooks
 ```
 
-> If your notebook saves figures/tables, set output paths like `reports/figures/` and `reports/tables/`.
-
-### 3) Reproduce key tables locally (optional)
-- Customer summary and gender distribution come directly from `shopping_mall_data.xlsx`.
-- Sales totals/date range are computed from `sales_data.xlsx` if columns are present (`Sales`/`Amount` and `Date`).
+### 3) Outputs
+- **Figures** (EDA & segment profiles) → consider saving to `reports/figures/`
+- **Tables/exports** (e.g., segment assignments) → `data/processed/` or `reports/tables/`
 
 ---
 
-## How to interpret & reuse outputs
-- **Segment table** (if created): use means/medians per segment to design **personalized offers** and **channel mix**.
-- **EDA visuals**: include 2–3 with business‑first captions in presentations (e.g., “High‑income, high‑spend cohort = VIP campaign target”).
-- **CSV/Excel exports**: hand to CRM for targeted campaigns or to BI tools (Tableau/Power BI) for ongoing monitoring.
-
----
-
-## Evidence of Business Analytics skills
-- **Data storytelling:** clear visuals linked to a narrative (“so what?”).
-- **Modeling & segmentation:** interpretable clusters tied to marketing actions.
-- **From data to decision:** concrete recommendations per segment and KPIs that matter to Commercial/Marketing.
-- **Reproducibility:** notebook + raw data; easy to rerun and extend (e.g., RFM, propensity modeling).
-
----
-
-## Next steps (roadmap)
-- Join `sales_data.xlsx` and customer segments to quantify **revenue by segment**.
-- Add **RFM analysis** and **propensity‑to‑respond** modeling for targeted campaigns.
-- Build a lightweight **Tableau/Power BI** dashboard that tracks segment KPIs over time.
-
----
-
-## Contact
-**Dante Shoghanian** — MSBA candidate  
-Email/LinkedIn: _add yours here_
+## Interpreting & reusing outputs
+- Use segment/demographic summaries to **target campaigns** and **tailor assortments**
+- Join segment labels with sales to compute **revenue by segment**
+- Export summary tables to **Tableau/Power BI** for ongoing KPI tracking
